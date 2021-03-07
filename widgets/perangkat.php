@@ -1,8 +1,8 @@
 <?php
 
-register_widget( 'OpenSID_Widget_Perangkat_Widget' );
+register_widget( 'OpenSID_Widget_Perangkat' );
 
-class OpenSID_Widget_Perangkat_Widget extends WP_Widget
+class OpenSID_Widget_Perangkat extends WP_Widget
 {
 
     public function __construct()
@@ -29,7 +29,10 @@ class OpenSID_Widget_Perangkat_Widget extends WP_Widget
         if ( $title ) {
             echo $before_title . $title . $after_title;
         }
-        var_dump( $OpenSID->listAparat() );
+
+        foreach ( $OpenSID->listAparat() as $aparat ) {
+
+        }
         echo $after_widget;
     }
 
