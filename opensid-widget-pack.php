@@ -28,8 +28,13 @@ class OpenSID_Widget_Pack
 
     public function init()
     {
-        wp_register_script( self::$name, OPENSID_WP_URL . 'script.js', ['jquery'], self::$version );
-        wp_register_style( self::$name, OPENSID_WP_URL . 'style.css', [], self::$version );
+        if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+            wp_register_script( self::$name, OPENSID_WP_URL . 'script.js', ['jquery'], null );
+            wp_register_style( self::$name, OPENSID_WP_URL . 'style.css', [], null );
+        } else {
+            wp_register_script( self::$name, OPENSID_WP_URL . 'script.js', ['jquery'], self::$version );
+            wp_register_style( self::$name, OPENSID_WP_URL . 'style.css', [], self::$version );
+        }
         if ( !defined( 'OPENSID_KONEKTOR' ) ) {
             add_action( 'admin_notices', [$this, 'notice_no_konektor'] );
         }
@@ -54,12 +59,12 @@ class OpenSID_Widget_Pack
 
     public function javascripts()
     {
-        wp_enqueue_script( 'opensid-widget-pack' );
+        wp_enqueue_script( self::$name );
     }
 
     public function stylesheets()
     {
-        wp_enqueue_style( 'opensid-widget-pack' );
+        wp_enqueue_style( self::$name );
     }
 
     public static function run()

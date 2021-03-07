@@ -1,0 +1,96 @@
+
+/** Aparat Slider **/
+.widget_opensid_widget_perangkat .slider-wrapper {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 40vw;
+    max-height: 400px;
+    min-height: 300px;
+    background: #ddd;
+    overflow: hidden;
+    max-width: 200px;
+    margin: auto;
+  }
+  @media screen and (min-width: 768px) {
+    .widget_opensid_widget_perangkat .slider-wrapper {
+        max-width: 500px;
+        max-height: 600px;
+    }
+}
+  
+.widget_opensid_widget_perangkat .slider-wrapper ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.widget_opensid_widget_perangkat .slider-wrapper ul.slider-items {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    transition: 0.5s;
+}
+
+.widget_opensid_widget_perangkat .slider-wrapper ul.slider-items li {
+    flex: 1 0 100%;
+}
+  
+.widget_opensid_widget_perangkat .slider-wrapper ul.slider-items li img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+  
+  /* slider-arrow */
+.widget_opensid_widget_perangkat .slider-wrapper ul.slider-arrow {
+    z-index: 100;
+    position: relative;
+    color: #fff;
+    font-size: 2rem;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    pointer-events: visiblepainted;
+}
+  
+@media screen and (min-width: 768px) {
+    .widget_opensid_widget_perangkat .slider-wrapper ul.slider-arrow {
+        font-size: 2.5rem;
+    }
+}
+  
+.widget_opensid_widget_perangkat .slider-wrapper ul.slider-arrow li {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    height: 100%;
+    padding: 0 15px;
+    opacity: 0.4;
+    transition: 0.5s;
+}
+  
+.widget_opensid_widget_perangkat .slider-wrapper ul.slider-arrow li:hover {
+    opacity: 1;
+}
+
+.slider-items li .slider-caption {
+    position: relative;
+    display: block;
+    padding-top: 8px;
+    height: 60px;
+    top: -60px;
+    text-align: center;
+    /* background-color: #ffffff75; */
+}
+
+.slider-items li .slider-caption > span {
+    background-color: #ffffff99;
+    padding: 0px 5px;
+    border-radius: 3px;
+    line-break: none;
+    white-space: nowrap;
+}

@@ -29,10 +29,22 @@ class OpenSID_Widget_Perangkat extends WP_Widget
         if ( $title ) {
             echo $before_title . $title . $after_title;
         }
-
+        echo '<div class="slider-wrapper">';
+        //echo '<a href="#" class="control_next">></a><a href="#" class="control_prev"><</a>';
+        echo '<ul class="slider-arrow"><li class="arrow-left" role="button">&lt;</li><li class="arrow-right" role="button">&gt;</li></ul>';
+        echo '<ul class="slider-items">';
         foreach ( $OpenSID->listAparat() as $aparat ) {
-
+            printf( '<li>
+                    <img class="widget-aparat-foto" src="%s"/>
+                    <div class="slider-caption">
+                        <span class="widget-aparat-nama">%s</span><br/>
+                        <span class="widget-aparat-jabatan">%s</span>
+                    </div>
+                    </li>', esc_attr( $aparat['foto'] ), esc_html( $aparat['nama'] ), esc_html( $aparat['jabatan'] ) );
         }
+        echo '</ul>';
+        echo "</div>";
+
         echo $after_widget;
     }
 
