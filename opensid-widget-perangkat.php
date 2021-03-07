@@ -7,7 +7,6 @@
  * Author URI: http://klampok.id/
  */
 
-define( 'OPENSID_WP_DIR', plugin_dir_path( __FILE__ ) );
 define( 'OPENSID_WP_URL', plugins_url( '', __FILE__ ) . '/' );
 
 class OpenSID_Widget_Perangkat
@@ -24,6 +23,7 @@ class OpenSID_Widget_Perangkat
         add_action( 'init', array( $this, 'init' ) );
         add_action( 'wp_print_scripts', array( $this, 'javascripts' ) );
         add_action( 'wp_print_styles', array( $this, 'stylesheets' ) );
+        add_action( 'widgets_init', array( $this, 'widgets_init' ) );
     }
 
     public function init()
@@ -33,6 +33,11 @@ class OpenSID_Widget_Perangkat
         if ( !defined( 'OPENSID_KONEKTOR' ) ) {
             add_action( 'admin_notices', [$this, 'notice_no_konektor'] );
         }
+    }
+
+    public function widgets_init()
+    {
+        include plugin_dir_path( __FILE__ ) . 'widget.php';
     }
 
     public function notice_no_konektor()
