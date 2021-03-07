@@ -16,7 +16,6 @@ class OpenSID_Widget_Perangkat
     public static $name = 'opensid_widget_perangkat';
     public static $version = '1.0.0';
     public static $me = false;
-    public static $konektor = null;
 
     public function __construct()
     {
@@ -31,10 +30,9 @@ class OpenSID_Widget_Perangkat
     {
         wp_register_script( 'opensid-widget-perangkat', OPENSID_WP_URL . 'script.js', ['jquery'], self::$version );
         wp_register_style( 'opensid-widget-perangkat', OPENSID_WP_URL . 'style.css', [], self::$version );
-        if ( !isset( $GLOBALS['OpenSID'] ) ) {
+        if ( !defined( 'OPENSID_KONEKTOR' ) ) {
             add_action( 'admin_notices', [$this, 'notice_no_konektor'] );
         }
-        self::$konektor = $GLOBALS['OpenSID'];
     }
 
     public function notice_no_konektor()
