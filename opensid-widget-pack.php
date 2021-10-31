@@ -46,6 +46,7 @@ class OpenSID_Widget_Pack
 
         // Keep it simple to make it secure
         include $widgets_dir . 'perangkat.php';
+        include $widgets_dir . 'kontak.php';
     }
 
     public function notice_no_konektor()
