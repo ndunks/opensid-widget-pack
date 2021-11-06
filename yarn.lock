@@ -1862,6 +1862,11 @@
   resolved "https://registry.yarnpkg.com/@types/unist/-/unist-2.0.6.tgz#250a7b16c3b91f672a24552ec64678eeb1d3a08d"
   integrity sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==
 
+"@types/webpack-env@^1.16.3":
+  version "1.16.3"
+  resolved "https://registry.yarnpkg.com/@types/webpack-env/-/webpack-env-1.16.3.tgz#b776327a73e561b71e7881d0cd6d34a1424db86a"
+  integrity sha512-9gtOPPkfyNoEqCQgx4qJKkuNm/x0R2hKR7fdl7zvTJyHnIisuE/LfvXOsYWL0o3qq6uiBnKZNNNzi3l0y/X+xw==
+
 "@types/webpack-sources@*":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@types/webpack-sources/-/webpack-sources-3.2.0.tgz#16d759ba096c289034b26553d2df1bf45248d38b"
@@ -2670,6 +2675,23 @@
     webpack-bundle-analyzer "^4.4.2"
     webpack-cli "^4.7.2"
     webpack-livereload-plugin "^3.0.1"
+
+"@wordpress/server-side-render@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@wordpress/server-side-render/-/server-side-render-3.0.4.tgz#098729bafed5e402a7dbfce84d5b6ef017fc34a2"
+  integrity sha512-/LxybA6D/deSvhDXqD33NIHFL2o7QNQzmwXKiHn5DiTnuPGVXyyYoQ1LYyoH9pqq1MOjydtx3W4vA5y2REVYgw==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@wordpress/api-fetch" "^5.2.4"
+    "@wordpress/blocks" "^11.1.2"
+    "@wordpress/components" "^19.0.0"
+    "@wordpress/compose" "^5.0.4"
+    "@wordpress/data" "^6.1.2"
+    "@wordpress/deprecated" "^3.2.2"
+    "@wordpress/element" "^4.0.3"
+    "@wordpress/i18n" "^4.2.3"
+    "@wordpress/url" "^3.2.3"
+    lodash "^4.17.21"
 
 "@wordpress/shortcode@^3.2.2":
   version "3.2.2"

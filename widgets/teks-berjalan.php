@@ -1,60 +1,64 @@
 <?php
 
-register_widget( 'OpenSID_Widget_Teks_Berjalan' );
+//register_widget( 'OpenSID_Widget_Teks_Berjalan' );
 
-class OpenSID_Widget_Teks_Berjalan extends WP_Widget
-{
-
-    public function __construct()
-    {
-        $widget_ops = array(
-			'classname'                   => 'widget_owp_teks_berjalan',
-			'description'                 => __( 'OpenSID: Menampilkan teks berjalan custom HTML atau kategori' ),
-			'customize_selective_refresh' => true,
-			'show_instance_in_rest'       => true,
-		);
-        parent::__construct(
-            // Base ID of your widget
-            'opensid_widget_teks_berjalan',
-            // Widget name will appear in UI
-            'OpenSID Widget Teks Berjalan',
-            // Widget Opts
-            $widget_ops
-        );
+register_block_type( 'opensid-widget-pack/teks-berjalan', array(
+    'api_version' => 2,
+    'editor_script' => OpenSID_Widget_Pack::$name,
+    'editor_style' => OpenSID_Widget_Pack::$name,
+    'render_callback' => 'opensid_widget_text_berjalan',
+    'category' => "widgets",
+    "attributes" => [
+        "text" => [
+            "type" => "string",
+            "default" => "Silahkan Ubah Teks",
+        ],
+        "post_count" => [
+            "type" => "number",
+            "default" => 5
+        ],
+        "time" => [
+            "type" => "number",
+            "default" => 10
+        ],
+        "post_category" => [
+            "type" => "string"
+        ],
+    ]
+    // "supports" => [
+    //     "align" => true,
+    //     "html" => false
+    // ]
+) );
+ 
+function opensid_widget_text_berjalan( $attributes, $content, $myblockdefs ) {
+    ob_start();
+    echo '<div class="widget_opensid_widget_teks_berjalan">';
+    echo '<div class="widget_opensid_widget_teks_berjalan_item"
+    style="animation : teks_berjalan ' . $attributes['time'] . 's linear infinite;"
+    >';
+    if( is_string($attributes['text']) ) {
+        echo '<b>' . esc_html( $attributes['text'] ) . '</b> ';
     }
-
-    public function widget( $args, $instance )
-    {
-        extract( $args );
-        $title = apply_filters( 'widget_title', $instance['title'] );
-        echo $before_widget;
-        if ( $title ) {
-            echo $before_title . $title . $after_title;
+    if( is_int($attributes['post_count']) ) {
+        $recent_posts = wp_get_recent_posts( array(
+            'numberposts' => $attributes['post_count'],
+            'post_status' => 'publish',
+        ) );
+        if ( count( $recent_posts ) > 0 ) {
+            foreach ($recent_posts as $key => $post_id) {
+                printf(
+                    '<a href="%1$s">%2$s</a> ',
+                    esc_url( get_permalink( $post_id ) ),
+                    esc_html( get_the_title( $post_id ) )
+                );
+            }
         }
-        echo '<div class="teks-berjalan">';
-        echo "<h3>TEKS JALAN</h3>";
-        echo '</div>';
-
-        echo $after_widget;
     }
-
-    function update( $new_instance, $old_instance )
-    {
-        $instance = $old_instance;
-        $instance['title'] = strip_tags( $new_instance['title'] );
-        return $instance;
-    }
-
-    function form( $instance )
-    {
-        $title = esc_attr( @$instance['title'] );
-
-        ?>
-         <p>
-          <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' );?></label>
-          <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
-        </p>
-        <?php
-}
-
+    // echo '<pre>';
+    // var_dump($attributes, $content);
+    // echo '</pre>';
+    echo '</div>';
+    echo '</div>';
+    return ob_get_clean();
 }

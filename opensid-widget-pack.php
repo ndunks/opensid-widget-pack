@@ -47,18 +47,9 @@ class OpenSID_Widget_Pack
             $js_build['dependencies'],
             $js_build['version']
         );
-        register_block_type( 'opensid-widget-pack/widget-1', array(
-            'api_version' => 2,
-            'editor_script' => self::$name . '/widget-1',
-        ) );
-    
-        // if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-        //     wp_register_script( self::$name, OPENSID_WP_URL . 'script.js', $script_depencies, null );
-            wp_register_style( self::$name, OPENSID_WP_URL . 'style.css', [], null );
-        // } else {
-        //     wp_register_script( self::$name, OPENSID_WP_URL . 'script.js', $script_depencies, self::$version );
-        //     wp_register_style( self::$name, OPENSID_WP_URL . 'style.css', [], self::$version );
-        // }
+        
+        wp_register_style( self::$name, OPENSID_WP_URL . 'style.css', [], $js_build['version'] );
+        
         if ( !defined( 'OPENSID_KONEKTOR' ) ) {
             add_action( 'admin_notices', [$this, 'notice_no_konektor'] );
         }

@@ -94,3 +94,30 @@
     line-break: none;
     white-space: nowrap;
 }
+
+.widget_opensid_widget_teks_berjalan {
+    background:#ccc;
+    padding:0.5rem;
+    overflow: hidden;
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    border-radius: 12px;
+    background-color: #51bf1f;
+    box-shadow: 1px 1px 5px #000000a6
+}
+
+.widget_opensid_widget_teks_berjalan_item > * {
+    color: white;
+}
+
+@keyframes teks_berjalan {
+0% {
+    transform: translatex(100%)
+}
+
+100% {
+    transform: translatex(-100%)
+}
+}

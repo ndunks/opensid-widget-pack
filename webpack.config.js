@@ -2,7 +2,7 @@ const { join } = require("path");
 const webpack = require("webpack");
 
 // Set default entry before loading wp webpack.config
-process.env.WP_ENTRY = JSON.stringify({ index: join(__dirname, "src/index.tsx") });
+process.env.WP_ENTRY = JSON.stringify({ index: join(__dirname, "src/index.ts") });
 
 /** @type {webpack.Configuration} */
 const config = require("@wordpress/scripts/config/webpack.config");
