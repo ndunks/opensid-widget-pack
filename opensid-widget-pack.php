@@ -19,22 +19,46 @@ class OpenSID_Widget_Pack
     public function __construct()
     {
         self::$me = &$this;
-
+        
         add_action( 'init', array( $this, 'init' ) );
         add_action( 'wp_print_scripts', array( $this, 'javascripts' ) );
         add_action( 'wp_print_styles', array( $this, 'stylesheets' ) );
         add_action( 'widgets_init', array( $this, 'widgets_init' ) );
     }
-
+    
     public function init()
     {
-        if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-            wp_register_script( self::$name, OPENSID_WP_URL . 'script.js', ['jquery'], null );
-            wp_register_style( self::$name, OPENSID_WP_URL . 'style.css', [], null );
-        } else {
-            wp_register_script( self::$name, OPENSID_WP_URL . 'script.js', ['jquery'], self::$version );
-            wp_register_style( self::$name, OPENSID_WP_URL . 'style.css', [], self::$version );
+        $js_build = include( plugin_dir_path( __FILE__ ) . 'build/index.asset.php');
+        
+        if( $js_build['liveReloadPort'] ){
+            wp_register_script(
+                self::$name . '-livereload',
+                "http://localhost:" . $js_build['liveReloadPort'] . "/livereload.js",
+                [],
+                $js_build['version'],
+                false
+            );
+            $js_build['dependencies'][] = self::$name . '-livereload';
         }
+        
+        wp_register_script(
+            self::$name,
+            plugins_url( 'build/index.js', __FILE__ ),
+            $js_build['dependencies'],
+            $js_build['version']
+        );
+        register_block_type( 'opensid-widget-pack/widget-1', array(
+            'api_version' => 2,
+            'editor_script' => self::$name . '/widget-1',
+        ) );
+    
+        // if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+        //     wp_register_script( self::$name, OPENSID_WP_URL . 'script.js', $script_depencies, null );
+            wp_register_style( self::$name, OPENSID_WP_URL . 'style.css', [], null );
+        // } else {
+        //     wp_register_script( self::$name, OPENSID_WP_URL . 'script.js', $script_depencies, self::$version );
+        //     wp_register_style( self::$name, OPENSID_WP_URL . 'style.css', [], self::$version );
+        // }
         if ( !defined( 'OPENSID_KONEKTOR' ) ) {
             add_action( 'admin_notices', [$this, 'notice_no_konektor'] );
         }
@@ -47,6 +71,7 @@ class OpenSID_Widget_Pack
         // Keep it simple to make it secure
         include $widgets_dir . 'perangkat.php';
         include $widgets_dir . 'kontak.php';
+        include $widgets_dir . 'teks-berjalan.php';
     }
 
     public function notice_no_konektor()

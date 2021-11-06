@@ -1,0 +1,22 @@
+{
+  "name": "opensid-widget-pack",
+  "version": "1.0.0",
+  "description": "OpenSID Widget Pack",
+  "main": "build/index.js",
+  "repository": "git@github.com:ndunks/opensid-widget-pack.git",
+  "author": "Mochamad Arifin <klampok.child@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "wp": "wp-scripts",
+    "start": "wp-scripts start",
+    "build": "wp-scripts build"
+  },
+  "dependencies": {
+    "@wordpress/block-editor": "^7.0.4",
+    "@wordpress/blocks": "^11.1.2"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.8",
+    "@wordpress/scripts": "^19.0.0"
+  }
+}
