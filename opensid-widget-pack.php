@@ -14,6 +14,7 @@ class OpenSID_Widget_Pack
     public static $title = 'OpenSID Widget Pack';
     public static $name = 'opensid_widget_pack';
     public static $version = '1.0.1';
+    public static $version_hash = '1.0.1';
     public static $me = false;
 
     public function __construct()
@@ -30,7 +31,7 @@ class OpenSID_Widget_Pack
     {
         $js_build = include( plugin_dir_path( __FILE__ ) . 'build/index.asset.php');
         
-        if( $js_build['liveReloadPort'] ){
+        if( is_int(@$js_build['liveReloadPort']) ){
             wp_register_script(
                 self::$name . '-livereload',
                 "http://localhost:" . $js_build['liveReloadPort'] . "/livereload.js",
@@ -40,6 +41,8 @@ class OpenSID_Widget_Pack
             );
             $js_build['dependencies'][] = self::$name . '-livereload';
         }
+
+        self::$version_hash = $js_build['version'];
         
         wp_register_script(
             self::$name,
@@ -53,6 +56,18 @@ class OpenSID_Widget_Pack
         if ( !defined( 'OPENSID_KONEKTOR' ) ) {
             add_action( 'admin_notices', [$this, 'notice_no_konektor'] );
         }
+        add_filter( 'opensid_extensions', [$this, 'filter_callback'], 1 );
+    }
+
+    public function filter_callback($value){
+        $value[] = [
+            'name' => self::$name,
+            'title' => self::$title,
+            'file' => __FILE__,
+            'update_git' => true,
+            'version' => self::$version . ' ' . self::$version_hash,
+        ];
+        return $value;
     }
 
     public function widgets_init()
