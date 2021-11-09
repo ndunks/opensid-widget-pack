@@ -56,7 +56,7 @@ class OpenSID_Widget_Pack
         if ( !defined( 'OPENSID_KONEKTOR' ) ) {
             add_action( 'admin_notices', [$this, 'notice_no_konektor'] );
         }
-        add_filter( 'opensid_extensions', [$this, 'filter_callback'], 1 );
+        add_filter( 'opensid_extensions', [$this, 'filter_callback'], 30 );
     }
 
     public function filter_callback($value){
